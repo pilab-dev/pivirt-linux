@@ -1,0 +1,25 @@
+# Contributor: pivirt maintainer
+# Maintainer: pivirt maintainer
+pkgname=pivirt
+pkgver=1.0
+pkgrel=0
+pkgdesc="PIXE-bootable Virtualization Linux - pivirt daemon"
+url="https://github.com/yourorg/pivirt-linux"
+arch="x86_64"
+license="MIT"
+depends="qemu-openrc"
+makedepends="go"
+install=""
+subpackages=""
+source="myhypervisor.go"
+
+build() {
+    go build -o myhypervisor myhypervisor.go
+}
+
+package() {
+    install -Dm755 myhypervisor "$pkgdir/usr/bin/myhypervisor"
+    install -Dm755 pivirt.initd "$pkgdir/etc/init.d/pivirt"
+}
+
+sha512sums="PLACEHOLDER  myhypervisor.go"

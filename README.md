@@ -397,6 +397,28 @@ pivirt-linux/
 
 ---
 
+## 🚀 Alpine ISO (Offline Installer)
+
+For offline installation, an Alpine Linux-based ISO is available with an interactive installer.
+
+### Quick Build
+
+```bash
+cd alpine-iso
+bash build-alpine-iso.sh
+```
+
+### Output
+
+- `pivirt-alpine.iso` - Bootable ISO with pivirt (interactive install)
+- Includes `setup-pivirt` script and `myhypervisor` binary
+
+### Documentation
+
+See [alpine-iso/README-BUILD.md](alpine-iso/README-BUILD.md) for detailed build instructions.
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository

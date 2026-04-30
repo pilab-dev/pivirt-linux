@@ -1,0 +1,56 @@
+#!/bin/sh
+# pivirt interactive installer for live ISO
+# This script is available in the live environment
+
+echo "========================================"
+echo "   pivirt Interactive Installer"
+echo "========================================"
+echo ""
+echo "Welcome to pivirt!"
+echo ""
+echo "This installer will:"
+echo "  1. Configure basic system settings (setup-alpine)"
+echo "  2. Install pivirt to disk"
+echo "  3. Reboot into the installed system"
+echo ""
+
+read -p "Continue? [Y/n] " ans
+case "$ans" in
+    n|N) echo "Aborted."; exit 0;;
+esac
+
+# Step 1: Run setup-alpine
+echo ""
+echo "--- Step 1: System Configuration ---"
+setup-alpine
+
+# Step 2: Install pivirt
+echo ""
+echo "--- Step 2: Installing pivirt ---"
+if apk info pivirt >/dev/null 2>&1; then
+    echo "pivirt package found, installing..."
+    apk add pivirt
+else
+    echo "Warning: pivirt package not found in repos."
+    echo "Installing base system only. pivirt will need to be installed separately."
+fi
+
+# Step 3: Enable services
+echo ""
+echo "--- Step 3: Enabling Services ---"
+for svc in pivirt qemu; do
+    if [ -e "/etc/init.d/$svc" ]; then
+        rc-update add "$svc" default 2>/dev/null && echo "  Enabled: $svc"
+    fi
+done
+
+echo ""
+echo "========================================"
+echo "   Installation Complete!"
+echo "========================================"
+echo ""
+echo "The system will reboot in 5 seconds..."
+echo "Remove the installation media after reboot."
+echo ""
+sleep 5
+reboot
