@@ -1,12 +1,12 @@
-# Binaries
-*.raw
-*.img
+# Binaries (tracked via git-lfs)
+# *.raw and *.img are tracked by git-lfs
+
 *.qcow2
 
-# Large files served via HTTP
-http-root/rootfs.img
-http-root/initramfs.img
-http-root/vmlinuz
+# Large files served via HTTP (tracked via git-lfs)
+# http-root/rootfs.img
+# http-root/initramfs.img
+# http-root/vmlinuz
 
 # Temporary files
 *.log

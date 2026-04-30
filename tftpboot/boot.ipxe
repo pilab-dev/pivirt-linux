@@ -1,0 +1,5 @@
+#!ipxe
+set base-url http://10.0.2.2:8888
+kernel ${base-url}/vmlinuz initrd=initramfs.img console=ttyS0 coreos.live.rootfs_url=${base-url}/rootfs.img ignition.firstboot ignition.platform.id=qemu ignition.config.url=${base-url}/fcos-config.ign
+initrd ${base-url}/initramfs.img
+boot
