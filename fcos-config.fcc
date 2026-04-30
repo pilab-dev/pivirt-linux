@@ -1,0 +1,28 @@
+variant: fcos
+version: 1.4.0
+storage:
+  files:
+    - path: /var/lib/extensions/my-virt-stack.raw
+      contents:
+        source: http://10.0.2.2:8888/my-virt-stack.raw
+      mode: 0644
+systemd:
+  units:
+    - name: systemd-sysext.service
+      enabled: true
+    - name: myhypervisor.service
+      contents: |
+        [Unit]
+        Description=Custom Go KVM Hypervisor
+        After=network.target systemd-sysext.service
+        Requires=systemd-sysext.service
+
+        [Service]
+        Type=simple
+        ExecStart=/usr/bin/myhypervisor
+        Restart=always
+        LimitNOFILE=1048576
+
+        [Install]
+        WantedBy=multi-user.target
+      enabled: true

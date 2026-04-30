@@ -1,0 +1,18 @@
+# Binaries
+*.raw
+*.img
+*.qcow2
+
+# Large files served via HTTP
+http-root/rootfs.img
+http-root/initramfs.img
+http-root/vmlinuz
+
+# Temporary files
+*.log
+*.swp
+*~
+.DS_Store
+
+# Build artifacts
+my-virt-stack/usr/
